@@ -1,0 +1,105 @@
+@import 'tailwindcss';
+@import '@heroui/styles';
+
+/* 语义色统一影响页面、表单、表格及 Portal 中的浮层。 */
+:root,
+.light,
+.default,
+[data-theme='light'],
+[data-theme='default'] {
+  color-scheme: light;
+  --accent: oklch(55% 0.21 280);
+  --accent-foreground: oklch(99% 0 0);
+  --accent-hover: color-mix(in oklab, var(--accent) 92%, var(--foreground) 8%);
+  --background: oklch(97.5% 0.006 280);
+  --foreground: oklch(23% 0.025 280);
+  --border: oklch(89.5% 0.013 280);
+  --separator: var(--border);
+  --default: oklch(94% 0.012 280);
+  --default-foreground: var(--foreground);
+  --field-background: var(--surface);
+  --field-border: var(--border);
+  --field-foreground: var(--foreground);
+  --field-placeholder: oklch(50% 0.02 280);
+  --focus: var(--accent);
+  --link: var(--accent);
+  --muted: oklch(47% 0.024 280);
+  --overlay: var(--surface);
+  --overlay-foreground: var(--foreground);
+  --scrollbar: oklch(80% 0.02 280);
+  --segment: var(--surface);
+  --segment-foreground: var(--foreground);
+  --surface: oklch(100% 0 0);
+  --surface-foreground: var(--foreground);
+  --surface-secondary: oklch(95.5% 0.009 280);
+  --surface-secondary-foreground: var(--foreground);
+  --surface-tertiary: oklch(93% 0.016 280);
+  --surface-tertiary-foreground: var(--foreground);
+  --success: oklch(49% 0.14 150);
+  --success-foreground: oklch(99% 0 0);
+  --success-hover: color-mix(in oklab, var(--success) 92%, var(--foreground) 8%);
+  --success-soft: oklch(94% 0.045 150);
+  --success-soft-foreground: oklch(36% 0.1 150);
+  --success-soft-hover: oklch(91% 0.07 150);
+  --warning: oklch(78% 0.16 80);
+  --warning-foreground: oklch(23% 0.035 75);
+  --warning-hover: color-mix(in oklab, var(--warning) 92%, var(--foreground) 8%);
+  --warning-soft: oklch(96% 0.065 80);
+  --warning-soft-foreground: oklch(43% 0.09 75);
+  --warning-soft-hover: oklch(93% 0.09 80);
+  --danger: oklch(54% 0.2 28);
+  --danger-foreground: oklch(99% 0 0);
+  --danger-hover: color-mix(in oklab, var(--danger) 92%, var(--foreground) 8%);
+  --radius: 0;
+  --field-radius: 0;
+  --surface-shadow: 0 1px 3px oklch(20% 0.02 280 / 4%);
+  --overlay-shadow: 0 12px 36px oklch(20% 0.02 280 / 14%);
+  --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+
+.dark,
+[data-theme='dark'] {
+  color-scheme: dark;
+  --accent: oklch(77% 0.13 285);
+  --accent-foreground: oklch(18% 0.03 280);
+  --background: oklch(16% 0.014 280);
+  --foreground: oklch(95% 0.009 280);
+  --border: oklch(33% 0.023 280);
+  --default: oklch(29% 0.022 280);
+  --field-background: oklch(24% 0.022 280);
+  --field-placeholder: oklch(72% 0.02 280);
+  --muted: oklch(76% 0.02 280);
+  --overlay: oklch(25% 0.022 280);
+  --scrollbar: oklch(45% 0.025 280);
+  --segment: oklch(34% 0.025 280);
+  --surface: oklch(21% 0.018 280);
+  --surface-secondary: oklch(25% 0.021 280);
+  --surface-tertiary: oklch(29% 0.026 280);
+  --success: oklch(78% 0.19 150);
+  --success-foreground: oklch(18% 0.04 150);
+  --success-soft: oklch(29% 0.07 150);
+  --success-soft-foreground: oklch(88% 0.11 150);
+  --success-soft-hover: oklch(35% 0.09 150);
+  --warning: oklch(83% 0.17 75);
+  --warning-foreground: oklch(20% 0.04 70);
+  --warning-soft: oklch(30% 0.075 65);
+  --warning-soft-foreground: oklch(90% 0.12 75);
+  --warning-soft-hover: oklch(36% 0.09 65);
+  --danger: oklch(74% 0.16 25);
+  --danger-foreground: oklch(18% 0.03 25);
+  --surface-shadow: 0 1px 3px oklch(0% 0 0 / 18%);
+  --overlay-shadow: 0 12px 36px oklch(0% 0 0 / 35%);
+}
+
+@layer base {
+  html {
+    scrollbar-gutter: stable;
+  }
+  body {
+    margin: 0;
+  }
+  ::selection {
+    background: var(--accent-soft);
+    color: var(--foreground);
+  }
+}

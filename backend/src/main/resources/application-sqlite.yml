@@ -1,0 +1,29 @@
+spring:
+  datasource:
+    url: jdbc:sqlite:${APP_SQLITE_PATH:./data/cinema.sqlite}
+    driver-class-name: org.sqlite.JDBC
+    hikari:
+      maximum-pool-size: 1
+      connection-init-sql: PRAGMA foreign_keys = ON
+  jpa:
+    database-platform: org.hibernate.community.dialect.SQLiteDialect
+    hibernate:
+      # SQLiteDialect cannot add foreign keys after table creation.
+      # Use explicit initialization SQL so API and Lab DELETE both cascade.
+      ddl-auto: none
+    properties:
+      hibernate:
+        dialect: org.hibernate.community.dialect.SQLiteDialect
+  flyway:
+    enabled: false
+  sql:
+    init:
+      mode: always
+      schema-locations: classpath:db/schema-sqlite.sql
+
+app:
+  lab:
+    datasource:
+      url: jdbc:sqlite:${APP_SQLITE_PATH:./data/cinema.sqlite}
+      username: ""
+      password: ""

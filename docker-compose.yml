@@ -1,0 +1,38 @@
+services:
+  mysql:
+    image: mysql:8.4
+    container_name: dblab-mysql
+    environment:
+      MYSQL_DATABASE: dblab
+      MYSQL_USER: dblab
+      MYSQL_PASSWORD: ${APP_DB_PASSWORD:?Set APP_DB_PASSWORD for the teaching database}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:?Set MYSQL_ROOT_PASSWORD}
+    ports:
+      - "127.0.0.1:3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD-SHELL", "MYSQL_PWD=\"$$MYSQL_PASSWORD\" mysql --protocol=TCP -h 127.0.0.1 -u\"$$MYSQL_USER\" -D \"$$MYSQL_DATABASE\" -e 'SELECT 1'"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+
+  backend:
+    build:
+      context: ./backend
+    container_name: dblab-backend
+    depends_on:
+      mysql:
+        condition: service_healthy
+    environment:
+      SPRING_PROFILES_ACTIVE: mysql
+      APP_DB_URL: jdbc:mysql://mysql:3306/dblab?connectionTimeZone=UTC&forceConnectionTimeZoneToSession=true
+      APP_DB_USERNAME: dblab
+      APP_DB_PASSWORD: ${APP_DB_PASSWORD:?Set APP_DB_PASSWORD for the teaching database}
+      APP_SECURITY_JWT_SECRET: ${APP_SECURITY_JWT_SECRET:?Set APP_SECURITY_JWT_SECRET}
+    ports:
+      - "127.0.0.1:8090:8090"
+
+volumes:
+  mysql-data:
